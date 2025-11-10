@@ -5,15 +5,6 @@ import Button from '../common/Button.js';
 import { ArrowRightIcon } from '../icons/Icons.js';
 import { AppContext } from '../../App.js';
 
-// Fix: Augment the global Window interface to include properties from the YouTube Iframe API.
-// This informs TypeScript that window.YT and window.onYouTubeIframeAPIReady can exist.
-declare global {
-    interface Window {
-        YT: any;
-        onYouTubeIframeAPIReady: () => void;
-    }
-}
-
 const quizPoints = [
     { time: 60, question: "¿Qué condición es fundamental para la definición de límite en un punto c?", options: ["Que f(c) exista", "El comportamiento de f(x) cerca de c", "Que la función sea polinómica"], answer: "El comportamiento de f(x) cerca de c", answered: false },
     { time: 150, question: "Si una función es continua en un intervalo cerrado, ¿qué teorema garantiza que alcanza un valor máximo y mínimo?", options: ["Teorema del Valor Intermedio", "Teorema de Rolle", "Teorema de Weierstrass (Existencia de Máximos y Mínimos)"], answer: "Teorema de Weierstrass (Existencia de Máximos y Mínimos)", answered: false },

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '../common/Button.js';
 import Card from '../common/Card.js';
 
-// Fix: Define an interface for form errors to provide strong typing.
+// Fix: Define an interface for the form errors to provide type safety.
 interface FormErrors {
     name?: string;
     email?: string;
@@ -12,11 +12,11 @@ const LoginForm = ({ onLogin }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [rut, setRut] = useState('');
-    // Fix: Use the FormErrors interface for the errors state.
+    // Fix: Specify the type for the 'errors' state object.
     const [errors, setErrors] = useState<FormErrors>({});
 
     const validate = () => {
-        // Fix: Explicitly type newErrors to allow adding name and email properties.
+        // Fix: Use the FormErrors type for the newErrors object.
         const newErrors: FormErrors = {};
         if (!name.trim()) {
             newErrors.name = 'El nombre completo es requerido.';
@@ -30,14 +30,15 @@ const LoginForm = ({ onLogin }) => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (validate()) {
             onLogin({ name, email, rut });
         }
     };
 
-    const getInputClass = (field) => {
+    // Fix: Add type annotation for the 'field' parameter.
+    const getInputClass = (field: keyof FormErrors) => {
         let baseClass = "w-full px-4 py-2 bg-white/50 dark:bg-gray-700/50 border rounded-lg focus:outline-none focus:ring-2 transition-colors";
         if (errors[field]) {
             return `${baseClass} border-red-500 focus:ring-red-500`;
